@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Fraunces", "Times New Roman", Georgia, serif;
+  --font-sans: "Public Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --color-forest: #0E2F22;
+  --color-gold: #D4AF37;
+  --color-pearl: #F2F2F2;
+  --color-ink: #1A1A1A;
+  --color-white: #FFFFFF;
+}
+
+@layer base {
+  body {
+    @apply bg-pearl text-ink font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer utilities {
+  .grid-swiss {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+  }
+
+  .border-forest {
+    border-color: var(--color-forest);
+  }
+
+  .text-forest {
+    color: var(--color-forest);
+  }
+
+  .bg-forest {
+    background-color: var(--color-forest);
+  }
+  
+  .border-pearl {
+    border-color: #ddd;
+  }
+}
+
