@@ -6,6 +6,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
+import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { ChevronDown, ArrowRight, Menu, X, Mail, MapPin, Phone, Globe2, FileText, ExternalLink } from 'lucide-react';
 import { translations, Language } from './lang/translations';
 
@@ -17,6 +18,221 @@ const ScrollToTop = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
   return null;
+};
+
+const SEO = ({ title, description }: { title: string, description: string }) => {
+  return (
+    <Helmet>
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <meta name="robots" content="index, follow" />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:type" content="website" />
+    </Helmet>
+  );
+};
+
+const SkeletonLoader = ({ type = 'text' }: { type?: 'header' | 'text' | 'cards' | 'map' | 'timeline' | 'contact' }) => {
+  if (type === 'header') {
+    return (
+      <div className="bg-forest py-24 px-6 md:px-12 relative overflow-hidden animate-pulse">
+        <div className="max-w-4xl space-y-4 relative z-10">
+          <div className="h-16 bg-white/10 w-2/3 rounded-sm" />
+          <div className="h-6 bg-white/5 w-1/2 rounded-sm" />
+        </div>
+      </div>
+    );
+  }
+
+  if (type === 'cards') {
+    return (
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-32 grid grid-cols-1 md:grid-cols-2 gap-12 animate-pulse">
+        {[1, 2, 3, 4].map((i) => (
+          <div key={i} className="p-12 border border-forest/10 bg-pearl/20 space-y-8">
+            <div className="w-12 h-1 bg-gold/20" />
+            <div className="h-10 bg-forest/10 w-3/4 rounded-sm" />
+            <div className="space-y-3">
+              <div className="h-4 bg-forest/5 w-full rounded-sm" />
+              <div className="h-4 bg-forest/5 w-11/12 rounded-sm" />
+              <div className="h-4 bg-forest/5 w-2/3 rounded-sm" />
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (type === 'map') {
+    return (
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-32 animate-pulse space-y-16">
+        <div className="space-y-4 text-center">
+          <div className="h-4 bg-forest/10 w-48 mx-auto rounded-sm" />
+          <div className="h-10 bg-forest/10 w-96 mx-auto rounded-sm" />
+        </div>
+        <div className="h-[450px] md:h-[600px] bg-forest/5 rounded-2xl" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="p-12 bg-white border border-forest/10 space-y-4">
+              <div className="h-4 bg-gold/20 w-1/3 rounded-sm" />
+              <div className="h-16 bg-forest/5 w-full rounded-sm" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (type === 'timeline') {
+    return (
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-32 animate-pulse grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-24">
+        <div className="space-y-6">
+          <div className="h-8 bg-forest/10 w-2/3 rounded-sm" />
+          <div className="h-24 bg-forest/5 w-full rounded-sm" />
+        </div>
+        <div className="space-y-16">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="pl-12 relative space-y-4">
+              <div className="absolute left-0 top-2 w-4 h-4 bg-forest/20 rounded-full" />
+              <div className="h-8 bg-gold/20 w-1/4 rounded-sm" />
+              <div className="h-6 bg-forest/10 w-1/2 rounded-sm" />
+              <div className="h-16 bg-forest/5 w-full rounded-sm" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (type === 'contact') {
+    return (
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-32 animate-pulse grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-24">
+        <div className="space-y-12">
+          <div className="h-8 bg-forest/10 w-1/2 rounded-sm" />
+          <div className="space-y-6">
+            <div className="h-12 bg-forest/5 w-full rounded-sm" />
+            <div className="h-12 bg-forest/5 w-full rounded-sm" />
+            <div className="h-12 bg-forest/5 w-full rounded-sm" />
+          </div>
+        </div>
+        <div className="bg-white p-12 border border-forest/10 space-y-8">
+          <div className="grid grid-cols-2 gap-10">
+            <div className="h-12 bg-forest/5 w-full rounded-sm" />
+            <div className="h-12 bg-forest/5 w-full rounded-sm" />
+          </div>
+          <div className="h-12 bg-forest/5 w-full rounded-sm" />
+          <div className="h-32 bg-forest/5 w-full rounded-sm" />
+          <div className="h-16 bg-forest/10 w-full rounded-sm" />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="max-w-7xl mx-auto px-6 md:px-12 py-32 animate-pulse space-y-12">
+      <div className="space-y-4">
+        <div className="h-10 bg-forest/10 w-1/3 rounded-sm" />
+        <div className="h-4 bg-forest/5 w-1/4 rounded-sm" />
+      </div>
+      <div className="space-y-4">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="border-b border-forest/10 pb-12 space-y-4">
+            <div className="h-8 bg-forest/10 w-2/3 rounded-sm" />
+            <div className="h-4 bg-forest/5 w-full rounded-sm" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const LiveClock = ({ offset }: { offset: number }) => {
+  const [time, setTime] = useState('');
+
+  useEffect(() => {
+    const updateClock = () => {
+      const d = new Date();
+      const utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+      const nd = new Date(utc + (3600000 * offset));
+      const hours = String(nd.getHours()).padStart(2, '0');
+      const minutes = String(nd.getMinutes()).padStart(2, '0');
+      const seconds = String(nd.getSeconds()).padStart(2, '0');
+      setTime(`${hours}:${minutes}:${seconds}`);
+    };
+
+    updateClock();
+    const interval = setInterval(updateClock, 1000);
+    return () => clearInterval(interval);
+  }, [offset]);
+
+  return <span className="font-mono text-xs text-gold font-semibold bg-gold/10 px-2.5 py-1 tracking-wider">{time}</span>;
+};
+
+const officeDetails = {
+  FR: [
+    {
+      city: 'Cotonou',
+      role: 'Siège Historique & Conseil aux États',
+      address: 'Zone Résidentielle, Lot 142, Cotonou, Bénin',
+      phone: '+229 21 31 15 15',
+      email: 'cotonou@robertdossou.com',
+      specialty: 'Droit constitutionnel, contentieux étatique africain, arbitrage régional (OHADA), réformes législatives.',
+      timezone: 'Afrique de l\'Ouest (UTC+1)',
+      gmtOffset: 1,
+    },
+    {
+      city: 'Paris',
+      role: 'Pôle Arbitrage & Droit International',
+      address: '12 Rue de la Paix, 75002 Paris, France',
+      phone: '+33 1 42 61 20 20',
+      email: 'paris@robertdossou.com',
+      specialty: 'Arbitrage international d\'investissement, contrats commerciaux internationaux, droit de l\'OMC.',
+      timezone: 'Europe Centrale (UTC+1 / UTC+2)',
+      gmtOffset: 2,
+    },
+    {
+      city: 'Genève',
+      role: 'Arbitrage & Diplomatie Multilatérale',
+      address: 'Rue du Rhône 42, 1204 Genève, Suisse',
+      phone: '+41 22 310 40 40',
+      email: 'geneve@robertdossou.com',
+      specialty: 'Médiation internationale, droits de l\'homme, propriété intellectuelle internationale, contentieux multilatéral.',
+      timezone: 'Europe Centrale (UTC+1 / UTC+2)',
+      gmtOffset: 2,
+    }
+  ],
+  EN: [
+    {
+      city: 'Cotonou',
+      role: 'Historical Headquarters & State Counsel',
+      address: 'Residential Zone, Lot 142, Cotonou, Benin',
+      phone: '+229 21 31 15 15',
+      email: 'cotonou@robertdossou.com',
+      specialty: 'Constitutional law, African state litigation, regional arbitration (OHADA), legislative reforms.',
+      timezone: 'West Africa Time (UTC+1)',
+      gmtOffset: 1,
+    },
+    {
+      city: 'Paris',
+      role: 'Arbitration & International Law Hub',
+      address: '12 Rue de la Paix, 75002 Paris, France',
+      phone: '+33 1 42 61 20 20',
+      email: 'paris@robertdossou.com',
+      specialty: 'International investment arbitration, international commercial contracts, WTO law.',
+      timezone: 'Central European Time (UTC+1 / UTC+2)',
+      gmtOffset: 2,
+    },
+    {
+      city: 'Geneva',
+      role: 'Arbitration & Multilateral Diplomacy',
+      address: 'Rue du Rhône 42, 1204 Geneva, Switzerland',
+      phone: '+41 22 310 40 40',
+      email: 'geneve@robertdossou.com',
+      specialty: 'International mediation, human rights, international intellectual property, multilateral litigation.',
+      timezone: 'Central European Time (UTC+1 / UTC+2)',
+      gmtOffset: 2,
+    }
+  ]
 };
 
 const Navbar = ({ lang, setLang }: { lang: Language, setLang: (l: Language) => void }) => {
@@ -143,8 +359,29 @@ const PageHeader = ({ title, subtitle }: { title: string, subtitle: string }) =>
 
 const HomePage = ({ lang }: { lang: Language }) => {
   const t = translations[lang];
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [lang]);
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col">
+        <SEO title={t.seo.home.title} description={t.seo.home.description} />
+        <SkeletonLoader type="header" />
+        <SkeletonLoader type="text" />
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col">
+      <SEO title={t.seo.home.title} description={t.seo.home.description} />
       <section className="bg-forest text-white min-h-[85vh] flex flex-col justify-center items-center p-6 md:p-24 relative overflow-hidden">
         <GlobeSVG className="absolute -right-24 top-1/2 -translate-y-1/2 w-[600px] h-[600px] opacity-10" />
         <div className="max-w-3xl mx-auto text-center flex flex-col items-center relative z-10">
@@ -341,8 +578,30 @@ const HomePage = ({ lang }: { lang: Language }) => {
 
 const HeritagePage = ({ lang }: { lang: Language }) => {
   const t = translations[lang].heritage;
+  const seo = translations[lang].seo.heritage;
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [lang]);
+
+  if (isLoading) {
+    return (
+      <div className="bg-pearl min-h-screen">
+        <SEO title={seo.title} description={seo.description} />
+        <SkeletonLoader type="header" />
+        <SkeletonLoader type="timeline" />
+      </div>
+    );
+  }
+
   return (
     <div className="bg-pearl min-h-screen">
+      <SEO title={seo.title} description={seo.description} />
       <PageHeader title={t.title} subtitle={t.subtitle} />
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-32">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-24">
@@ -375,8 +634,30 @@ const HeritagePage = ({ lang }: { lang: Language }) => {
 
 const ServicesPage = ({ lang }: { lang: Language }) => {
   const t = translations[lang].services;
+  const seo = translations[lang].seo.services;
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [lang]);
+
+  if (isLoading) {
+    return (
+      <div className="bg-white min-h-screen">
+        <SEO title={seo.title} description={seo.description} />
+        <SkeletonLoader type="header" />
+        <SkeletonLoader type="cards" />
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white min-h-screen">
+      <SEO title={seo.title} description={seo.description} />
       <PageHeader title={t.title} subtitle={t.subtitle} />
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-32 grid grid-cols-1 md:grid-cols-2 gap-12">
         {t.items.map((item) => (
@@ -402,40 +683,189 @@ const ServicesPage = ({ lang }: { lang: Language }) => {
 
 const ExpertisePage = ({ lang }: { lang: Language }) => {
   const t = translations[lang].expertise;
+  const seo = translations[lang].seo.expertise;
+  const [isLoading, setIsLoading] = useState(true);
+  const [activeLoc, setActiveLoc] = useState<number>(0);
+  const details = officeDetails[lang];
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [lang]);
+
+  if (isLoading) {
+    return (
+      <div className="bg-pearl min-h-screen">
+        <SEO title={seo.title} description={seo.description} />
+        <SkeletonLoader type="header" />
+        <SkeletonLoader type="map" />
+      </div>
+    );
+  }
+
+  const mapPins = [
+    { city: 'Cotonou', x: 48, y: 72 }, 
+    { city: 'Paris', x: 45, y: 34 },   
+    { city: 'Geneva', x: 52, y: 38 }   
+  ];
+
   return (
     <div className="bg-pearl min-h-screen">
+      <SEO title={seo.title} description={seo.description} />
       <PageHeader title={t.title} subtitle={t.subtitle} />
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-32">
-        <div className="mb-32">
+        <div className="mb-24">
           <h3 className="text-center text-gold uppercase tracking-[6px] text-xs font-bold mb-16">{t.globalPresence}</h3>
-          <div className="relative h-[400px] md:h-[600px] bg-forest rounded-3xl overflow-hidden shadow-2xl flex items-center justify-center">
-            <GlobeSVG className="absolute inset-0 w-full h-full opacity-20 scale-150" />
-            <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-12 w-full px-12">
-              {t.locations.map((loc, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  className="text-center"
-                >
-                  <div className="w-4 h-4 bg-gold rounded-full mx-auto mb-6 shadow-[0_0_20px_rgba(212,175,55,0.8)]" />
-                  <h4 className="text-3xl font-serif text-white mb-2">{loc.city}</h4>
-                  <p className="text-gold/60 text-sm uppercase tracking-widest">{loc.role}</p>
-                </motion.div>
+          
+          <div className="relative h-[450px] md:h-[600px] bg-forest rounded-2xl overflow-hidden shadow-2xl border border-white/5">
+            <div className="absolute inset-0 grid grid-cols-12 grid-rows-12 opacity-5 pointer-events-none">
+              {Array.from({ length: 144 }).map((_, idx) => (
+                <div key={idx} className="border-[0.5px] border-white/30" />
               ))}
             </div>
-            {/* Animated connection lines (stylized) */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
+            
+            <svg className="absolute inset-0 w-full h-full text-white/5 pointer-events-none" viewBox="0 0 800 500" preserveAspectRatio="none">
+              <path d="M 100 0 Q 200 250 100 500 M 200 0 Q 300 250 200 500 M 300 0 Q 400 250 300 500 M 400 0 Q 500 250 400 500 M 500 0 Q 600 250 500 500 M 600 0 Q 700 250 600 500 M 700 0 Q 800 250 700 500" stroke="currentColor" strokeWidth="0.5" fill="none" strokeDasharray="4 4" />
+              <line x1="0" y1="100" x2="800" y2="100" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 4" />
+              <line x1="0" y1="200" x2="800" y2="200" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 4" />
+              <line x1="0" y1="300" x2="800" y2="300" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 4" />
+              <line x1="0" y1="400" x2="800" y2="400" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 4" />
+            </svg>
+            
+            <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 100 100" preserveAspectRatio="none">
               <motion.path 
-                d="M 200 300 Q 500 100 800 300" 
+                d="M 48 72 Q 43 53 45 34" 
                 stroke="#D4AF37" 
-                strokeWidth="1" 
+                strokeWidth="0.4" 
                 fill="none" 
+                className="opacity-40"
                 initial={{ pathLength: 0 }}
                 animate={{ pathLength: 1 }}
-                transition={{ duration: 3, repeat: Infinity }}
+                transition={{ duration: 2, repeat: Infinity, repeatType: 'reverse' }}
+              />
+              <motion.path 
+                d="M 48 72 Q 53 55 52 38" 
+                stroke="#D4AF37" 
+                strokeWidth="0.4" 
+                fill="none" 
+                className="opacity-40"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 2.2, repeat: Infinity, repeatType: 'reverse' }}
+              />
+              <motion.path 
+                d="M 45 34 Q 48.5 33 52 38" 
+                stroke="#D4AF37" 
+                strokeWidth="0.4" 
+                fill="none" 
+                className="opacity-40"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 1.5, repeat: Infinity, repeatType: 'reverse' }}
               />
             </svg>
+
+            {mapPins.map((pin, idx) => {
+              const isActive = activeLoc === idx;
+              return (
+                <div 
+                  key={idx}
+                  style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
+                  className="absolute -translate-x-1/2 -translate-y-1/2 z-20 group"
+                >
+                  <div className={`absolute -inset-4 rounded-full transition-all duration-500 ${isActive ? 'bg-gold/25 scale-125' : 'bg-transparent group-hover:bg-gold/10'}`} />
+                  
+                  <div className="relative cursor-pointer" onClick={() => setActiveLoc(idx)}>
+                    <span className={`absolute inline-flex h-4 w-4 rounded-full bg-gold opacity-75 animate-ping ${isActive ? 'block' : 'hidden'}`} />
+                    <div className={`w-4 h-4 rounded-full border-2 border-forest transition-all duration-300 ${isActive ? 'bg-gold scale-125 shadow-[0_0_15px_#D4AF37]' : 'bg-white group-hover:bg-gold'}`} />
+                  </div>
+
+                  <div className={`absolute left-6 top-1/2 -translate-y-1/2 bg-white text-forest px-3 py-1.5 shadow-xl border border-gold/20 whitespace-nowrap transition-all duration-300 pointer-events-none ${isActive ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0'}`}>
+                    <p className="font-serif text-xs font-bold uppercase tracking-wider">{pin.city}</p>
+                  </div>
+                </div>
+              );
+            })}
+            
+            <div className="absolute bottom-6 left-6 bg-forest/80 backdrop-blur-sm border border-white/10 p-4 text-white z-10 hidden sm:block">
+              <span className="text-gold uppercase tracking-[3px] text-[9px] font-bold block mb-2">{t.globalPresence}</span>
+              <div className="space-y-1.5">
+                {mapPins.map((pin, idx) => (
+                  <button 
+                    key={idx}
+                    onClick={() => setActiveLoc(idx)}
+                    className={`flex items-center gap-2 text-xs text-left w-full hover:text-gold transition-colors ${activeLoc === idx ? 'text-gold font-bold' : 'text-white/60'}`}
+                  >
+                    <span className={`w-1.5 h-1.5 rounded-full ${activeLoc === idx ? 'bg-gold' : 'bg-white/40'}`} />
+                    {pin.city}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 mt-12">
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={activeLoc}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white p-8 md:p-12 border border-forest/5 shadow-md relative overflow-hidden flex flex-col justify-between"
+              >
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gold/5 rounded-bl-full pointer-events-none" />
+                <div>
+                  <div className="flex flex-wrap justify-between items-start gap-4 mb-8 pb-6 border-b border-forest/10">
+                    <div>
+                      <span className="text-gold uppercase tracking-[4px] text-xs font-bold block mb-2">{details[activeLoc].role}</span>
+                      <h4 className="text-4xl font-serif text-forest">{details[activeLoc].city}</h4>
+                    </div>
+                    <div className="flex flex-col items-end gap-1 text-right">
+                      <span className="text-[10px] uppercase tracking-wider text-ink/40 font-bold">Heure Locale</span>
+                      <LiveClock offset={details[activeLoc].gmtOffset} />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-6">
+                      <div>
+                        <span className="text-[10px] uppercase tracking-widest text-ink/40 font-bold block mb-2">Adresse de l'office</span>
+                        <p className="text-base text-forest font-light leading-relaxed">{details[activeLoc].address}</p>
+                      </div>
+                      <div>
+                        <span className="text-[10px] uppercase tracking-widest text-ink/40 font-bold block mb-2">Liaison de contact</span>
+                        <p className="text-base text-forest font-light mb-1">{details[activeLoc].phone}</p>
+                        <a href={`mailto:${details[activeLoc].email}`} className="text-gold text-sm hover:underline font-medium">{details[activeLoc].email}</a>
+                      </div>
+                    </div>
+                    <div>
+                      <span className="text-[10px] uppercase tracking-widest text-ink/40 font-bold block mb-2">Expertise de l'office</span>
+                      <p className="text-base text-forest/80 font-light leading-relaxed italic">{details[activeLoc].specialty}</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            <div className="flex flex-col gap-4">
+              {details.map((loc, idx) => (
+                <button 
+                  key={idx}
+                  onClick={() => setActiveLoc(idx)}
+                  className={`p-6 border text-left transition-all duration-300 flex justify-between items-center group relative overflow-hidden h-full min-h-[100px] ${activeLoc === idx ? 'bg-forest text-white border-forest shadow-lg' : 'bg-white hover:bg-pearl/50 border-forest/10 text-forest'}`}
+                >
+                  <div className="min-w-0 pr-4">
+                    <h5 className={`font-serif text-xl mb-1 ${activeLoc === idx ? 'text-white' : 'text-forest'}`}>{loc.city}</h5>
+                    <p className={`text-xs truncate uppercase tracking-wider ${activeLoc === idx ? 'text-gold/80' : 'text-ink/50'}`}>{loc.role}</p>
+                  </div>
+                  <ArrowRight size={18} className={`shrink-0 transition-transform duration-300 ${activeLoc === idx ? 'text-gold translate-x-0' : 'text-forest/30 group-hover:translate-x-1 group-hover:text-forest'}`} />
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -454,8 +884,30 @@ const ExpertisePage = ({ lang }: { lang: Language }) => {
 
 const PublicationsPage = ({ lang }: { lang: Language }) => {
   const t = translations[lang].publications;
+  const seo = translations[lang].seo.publications;
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [lang]);
+
+  if (isLoading) {
+    return (
+      <div className="bg-white min-h-screen">
+        <SEO title={seo.title} description={seo.description} />
+        <SkeletonLoader type="header" />
+        <SkeletonLoader type="text" />
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white min-h-screen">
+      <SEO title={seo.title} description={seo.description} />
       <PageHeader title={t.title} subtitle={t.subtitle} />
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-32">
         <div className="space-y-12">
@@ -488,8 +940,30 @@ const PublicationsPage = ({ lang }: { lang: Language }) => {
 
 const ContactPage = ({ lang }: { lang: Language }) => {
   const t = translations[lang].contact;
+  const seo = translations[lang].seo.contact;
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [lang]);
+
+  if (isLoading) {
+    return (
+      <div className="bg-pearl min-h-screen">
+        <SEO title={seo.title} description={seo.description} />
+        <SkeletonLoader type="header" />
+        <SkeletonLoader type="contact" />
+      </div>
+    );
+  }
+
   return (
     <div className="bg-pearl min-h-screen">
+      <SEO title={seo.title} description={seo.description} />
       <PageHeader title={t.title} subtitle={t.subtitle} />
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-32 grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-24">
         <div className="space-y-16">
@@ -660,24 +1134,26 @@ export default function App() {
   const [lang, setLang] = useState<Language>('FR');
 
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="min-h-screen flex flex-col selection:bg-gold selection:text-white font-sans antialiased">
-        <Navbar lang={lang} setLang={setLang} />
-        
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<HomePage lang={lang} />} />
-            <Route path="/heritage" element={<HeritagePage lang={lang} />} />
-            <Route path="/services" element={<ServicesPage lang={lang} />} />
-            <Route path="/expertise" element={<ExpertisePage lang={lang} />} />
-            <Route path="/publications" element={<PublicationsPage lang={lang} />} />
-            <Route path="/contact" element={<ContactPage lang={lang} />} />
-          </Routes>
-        </main>
+    <HelmetProvider>
+      <Router>
+        <ScrollToTop />
+        <div className="min-h-screen flex flex-col selection:bg-gold selection:text-white font-sans antialiased">
+          <Navbar lang={lang} setLang={setLang} />
+          
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<HomePage lang={lang} />} />
+              <Route path="/heritage" element={<HeritagePage lang={lang} />} />
+              <Route path="/services" element={<ServicesPage lang={lang} />} />
+              <Route path="/expertise" element={<ExpertisePage lang={lang} />} />
+              <Route path="/publications" element={<PublicationsPage lang={lang} />} />
+              <Route path="/contact" element={<ContactPage lang={lang} />} />
+            </Routes>
+          </main>
 
-        <Footer lang={lang} />
-      </div>
-    </Router>
+          <Footer lang={lang} />
+        </div>
+      </Router>
+    </HelmetProvider>
   );
 }

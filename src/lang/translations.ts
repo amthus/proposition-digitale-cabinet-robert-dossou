@@ -144,6 +144,32 @@ export const translations = {
       placeholder: 'Adresse email institutionnelle',
       button: 'S’inscrire',
       success: 'Inscription réussie.'
+    },
+    seo: {
+      home: {
+        title: 'Cabinet Robert DOSSOU | Excellence Juridique & Arbitrage International',
+        description: 'Cabinet de premier plan spécialisé en droit international, arbitrage et conseil stratégique aux États, dirigé par Maître Robert DOSSOU.'
+      },
+      heritage: {
+        title: 'Héritage & Parcours | Cabinet Robert DOSSOU',
+        description: 'Découvrez l\'histoire et l\'héritage institutionnel du Cabinet Robert DOSSOU, bâti sur des décennies d\'engagement juridique et constitutionnel.'
+      },
+      services: {
+        title: 'Services & Expertises Juridiques | Cabinet Robert DOSSOU',
+        description: 'Nos domaines d\'intervention de haute technicité : arbitrage international, droit constitutionnel, et conseil stratégique aux États.'
+      },
+      expertise: {
+        title: 'Présence Mondiale & Expertise | Cabinet Robert DOSSOU',
+        description: 'Une stature internationale avec une présence stratégique à Cotonou, Paris, et Genève au service de la diplomatie multilatérale.'
+      },
+      publications: {
+        title: 'Publications, Analyses & Insights | Cabinet Robert DOSSOU',
+        description: 'Rapports institutionnels et contributions doctrinales rédigés par Maître Robert DOSSOU et son équipe sur le droit contemporain.'
+      },
+      contact: {
+        title: 'Contact Diplomatique | Cabinet Robert DOSSOU',
+        description: 'Entrez en contact avec le secrétariat du Cabinet Robert DOSSOU pour toute consultation de haute stature ou arbitrage.'
+      }
     }
   },
   EN: {
@@ -289,6 +315,32 @@ export const translations = {
       placeholder: 'Institutional email address',
       button: 'Subscribe',
       success: 'Subscription successful.'
+    },
+    seo: {
+      home: {
+        title: 'Cabinet Robert DOSSOU | Legal Excellence & International Arbitration',
+        description: 'Leading legal institution specializing in international law, arbitration, and strategic counsel to States, led by Maître Robert DOSSOU.'
+      },
+      heritage: {
+        title: 'Heritage & Journey | Cabinet Robert DOSSOU',
+        description: 'Explore the history and institutional heritage of Cabinet Robert DOSSOU, built on decades of high-level legal and constitutional engagement.'
+      },
+      services: {
+        title: 'Legal Services & Expertises | Cabinet Robert DOSSOU',
+        description: 'Our high-tech areas of intervention: international arbitration, constitutional law, and strategic state counseling.'
+      },
+      expertise: {
+        title: 'Global Presence & Expertise | Cabinet Robert DOSSOU',
+        description: 'An international stature with a strategic presence in Cotonou, Paris, and Geneva for multilateral diplomacy.'
+      },
+      publications: {
+        title: 'Publications, Analyses & Insights | Cabinet Robert DOSSOU',
+        description: 'Institutional reports and doctrinal contributions authored by Maître Robert DOSSOU and his team on contemporary law.'
+      },
+      contact: {
+        title: 'Diplomatic Contact | Cabinet Robert DOSSOU',
+        description: 'Contact the secretariat of Cabinet Robert DOSSOU for high-level consultations or arbitration.'
+      }
     }
   }
 };
