@@ -138,6 +138,12 @@ export const translations = {
           role: 'Ancien Ministre de la Justice & Garde des Sceaux'
         }
       ]
+    },
+    newsletter: {
+      title: 'Publications & Analyses',
+      placeholder: 'Adresse email institutionnelle',
+      button: 'S’inscrire',
+      success: 'Inscription réussie.'
     }
   },
   EN: {
@@ -277,6 +283,12 @@ export const translations = {
           role: 'Former Minister of Justice & Attorney General'
         }
       ]
+    },
+    newsletter: {
+      title: 'Publications & Analyses',
+      placeholder: 'Institutional email address',
+      button: 'Subscribe',
+      success: 'Subscription successful.'
     }
   }
 };

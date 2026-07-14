@@ -552,16 +552,67 @@ const ContactPage = ({ lang }: { lang: Language }) => {
 
 const Footer = ({ lang }: { lang: Language }) => {
   const t = translations[lang].nav;
+  const n = translations[lang].newsletter;
+  const [email, setEmail] = useState('');
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
+  const handleSubscribe = (e: any) => {
+    e.preventDefault();
+    if (email) {
+      setIsSubscribed(true);
+      setEmail('');
+      setTimeout(() => setIsSubscribed(false), 5000);
+    }
+  };
+
   return (
     <footer className="bg-forest text-white py-24 px-6 md:px-12 border-t border-white/5">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-16">
-        <div className="col-span-1 md:col-span-2">
-          <Link to="/" className="font-serif text-3xl font-bold text-white uppercase mb-8 block">
-            Robert <span className="text-gold">Dossou</span>
-          </Link>
-          <p className="text-white/50 font-light max-w-md leading-relaxed">
-            Excellence juridique et autorité diplomatique au service des institutions et des États à travers le monde.
-          </p>
+        <div className="col-span-1 md:col-span-2 flex flex-col justify-between">
+          <div>
+            <Link to="/" className="font-serif text-3xl font-bold text-white uppercase mb-8 block">
+              <span className="hidden sm:inline">Robert <span className="text-gold">Dossou</span></span>
+              <span className="inline sm:hidden">D. <span className="text-gold">Robert</span></span>
+            </Link>
+            <p className="text-white/50 font-light max-w-md leading-relaxed">
+              Excellence juridique et autorité diplomatique au service des institutions et des États à travers le monde.
+            </p>
+          </div>
+
+          <div className="mt-8 max-w-md">
+            <h5 className="text-[10px] font-bold uppercase tracking-[3px] text-gold mb-3">
+              {n.title}
+            </h5>
+            <form onSubmit={handleSubscribe} className="flex bg-white text-forest focus-within:ring-2 focus-within:ring-gold transition-all duration-300">
+              <input 
+                type="email" 
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder={n.placeholder} 
+                className="bg-white text-forest text-sm px-4 py-3 w-full focus:outline-none placeholder-forest/40 font-light"
+              />
+              <button 
+                type="submit" 
+                className="bg-forest text-gold hover:bg-gold hover:text-forest uppercase text-[10px] font-bold tracking-widest px-6 transition-colors duration-300 flex items-center gap-2 whitespace-nowrap"
+              >
+                {n.button}
+                <ArrowRight size={12} className="shrink-0" />
+              </button>
+            </form>
+            <AnimatePresence>
+              {isSubscribed && (
+                <motion.p 
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="text-xs text-gold font-light mt-2"
+                >
+                  {n.success}
+                </motion.p>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
         <div>
           <h4 className="text-gold uppercase tracking-widest text-xs font-bold mb-8">Navigation</h4>
