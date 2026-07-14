@@ -636,6 +636,7 @@ const ServicesPage = ({ lang }: { lang: Language }) => {
   const t = translations[lang].services;
   const seo = translations[lang].seo.services;
   const [isLoading, setIsLoading] = useState(true);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -659,6 +660,8 @@ const ServicesPage = ({ lang }: { lang: Language }) => {
     <div className="bg-white min-h-screen">
       <SEO title={seo.title} description={seo.description} />
       <PageHeader title={t.title} subtitle={t.subtitle} />
+      
+      {/* Service Cards Section */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-32 grid grid-cols-1 md:grid-cols-2 gap-12">
         {t.items.map((item) => (
           <motion.div 
@@ -672,11 +675,110 @@ const ServicesPage = ({ lang }: { lang: Language }) => {
               <p className="text-lg text-ink/60 font-light leading-relaxed">{item.content}</p>
             </div>
             <Link to="/contact" className="mt-12 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-gold">
-              Demander une expertise <ArrowRight size={16} />
+              {lang === 'FR' ? 'Demander une expertise' : 'Request expertise'} <ArrowRight size={16} />
             </Link>
           </motion.div>
         ))}
       </div>
+
+      {/* Swiss Premium Accordion: Expertise FAQs */}
+      <section className="border-t border-forest/10 bg-pearl/10 py-32">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+            
+            {/* Left column: Section Header (Asymmetric Swiss Grid Layout) */}
+            <div className="lg:col-span-5 space-y-6">
+              <div className="flex items-center gap-3">
+                <span className="w-2 h-2 bg-gold rounded-full animate-pulse" />
+                <span className="font-mono text-xs uppercase tracking-[0.25em] text-gold font-semibold">
+                  {lang === 'FR' ? 'Questions & Doctrine' : 'Inquiries & Doctrine'}
+                </span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-serif text-forest leading-tight font-light">
+                {t.faqs_title}
+              </h2>
+              <div className="w-16 h-[1px] bg-forest/20 my-6" />
+              <p className="text-base text-ink/70 font-light leading-relaxed max-w-md">
+                {t.faqs_subtitle}
+              </p>
+              <div className="pt-4">
+                <Link 
+                  to="/contact" 
+                  className="inline-flex items-center gap-2 group text-xs font-bold uppercase tracking-[0.15em] text-forest hover:text-gold transition-colors duration-300"
+                >
+                  <span>{lang === 'FR' ? 'Consulter le secrétariat' : 'Consult the Secretariat'}</span>
+                  <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Right column: Swiss Premium Accordion */}
+            <div className="lg:col-span-7 space-y-0 border-t border-forest/15">
+              {t.faqs && t.faqs.map((faq, index) => {
+                const isOpen = openFaqIndex === index;
+                const formattedNum = String(index + 1).padStart(2, '0');
+                
+                return (
+                  <div 
+                    key={index} 
+                    className="border-b border-forest/15 hover:bg-forest/[0.01] transition-colors duration-300"
+                  >
+                    <button
+                      onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                      className="w-full py-8 text-left flex items-start gap-6 group focus:outline-none"
+                      aria-expanded={isOpen}
+                    >
+                      {/* Numbering */}
+                      <span className="font-mono text-xs text-gold/80 font-semibold tracking-wider pt-1 shrink-0">
+                        {formattedNum}.
+                      </span>
+
+                      {/* Question & Expand icon */}
+                      <div className="flex-grow flex justify-between items-start gap-4">
+                        <span className="text-lg md:text-xl font-sans text-forest font-medium leading-snug group-hover:text-gold transition-colors duration-300">
+                          {faq.question}
+                        </span>
+                        
+                        {/* Elegant minimalist plus/minus icon */}
+                        <div className="relative w-5 h-5 mt-1 shrink-0 flex items-center justify-center">
+                          {/* Horizontal line (always present) */}
+                          <div className="absolute w-4 h-[1.5px] bg-forest/60 group-hover:bg-gold transition-colors duration-300" />
+                          {/* Vertical line (rotates/shrinks when open) */}
+                          <motion.div 
+                            className="absolute w-[1.5px] h-4 bg-forest/60 group-hover:bg-gold"
+                            animate={{ rotate: isOpen ? 90 : 0, opacity: isOpen ? 0 : 1, scale: isOpen ? 0 : 1 }}
+                            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                          />
+                        </div>
+                      </div>
+                    </button>
+
+                    {/* Accordion Content Container */}
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pl-12 pr-6 pb-8 text-base text-ink/75 font-light leading-relaxed max-w-3xl">
+                            <p className="border-l border-gold/30 pl-4 py-1">
+                              {faq.answer}
+                            </p>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </div>
+
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

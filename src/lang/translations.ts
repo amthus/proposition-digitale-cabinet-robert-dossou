@@ -63,6 +63,26 @@ export const translations = {
           title: 'Arbitrage d\'Investissement',
           content: 'Protection des investissements étrangers et résolution de litiges entre investisseurs privés et entités étatiques.'
         }
+      ],
+      faqs_title: 'Foire Aux Questions — Expertises',
+      faqs_subtitle: 'Réponses à vos questions fréquentes concernant nos procédures d\'arbitrage international et de conseil constitutionnel.',
+      faqs: [
+        {
+          question: 'Comment s\'engage une procédure d\'arbitrage international ?',
+          answer: 'Une procédure d\'arbitrage international s\'amorce généralement par la présence d\'une clause compromissoire dans un contrat commercial ou un traité d\'investissement. Le cabinet vous accompagne à chaque étape : de la rédaction de la notification d\'arbitrage à la constitution du tribunal, la rédaction des mémoires juridiques et la plaidoirie orale.'
+        },
+        {
+          question: 'Quelle est la différence entre l\'arbitrage commercial et l\'arbitrage d\'investissement ?',
+          answer: 'L\'arbitrage commercial règle les litiges nés de relations contractuelles privées entre sociétés commerciales. L\'arbitrage d\'investissement résout quant à lui les litiges opposant un investisseur étranger à un État souverain hôte, généralement sur la base de traités bilatéraux ou multilatéraux d\'investissement (TBI).'
+        },
+        {
+          question: 'En quoi consiste concrètement le conseil constitutionnel aux États ?',
+          answer: 'Il s\'agit d\'un accompagnement stratégique et de haute technicité doctrinale : assistance à la révision de textes constitutionnels fondamentaux, harmonisation des lois nationales avec les traités internationaux, rédaction de projets de lois ou conseil sur le contentieux électoral et institutionnel majeur.'
+        },
+        {
+          question: 'Comment le cabinet garantit-il la stricte confidentialité des dossiers étatiques ?',
+          answer: 'La confidentialité absolue est l\'un de nos piliers fondamentaux. Nous appliquons des protocoles d\'archivage et de communication hautement sécurisés de type diplomatique. Tout notre personnel et nos experts affiliés sont contractuellement soumis au secret professionnel le plus strict.'
+        }
       ]
     },
     expertise: {
@@ -233,6 +253,26 @@ export const translations = {
           id: 'investment',
           title: 'Investment Arbitration',
           content: 'Protection of foreign investments and resolution of disputes between private investors and state entities.'
+        }
+      ],
+      faqs_title: 'Expertise FAQs',
+      faqs_subtitle: 'Answers to common inquiries regarding our international arbitration and constitutional counsel procedures.',
+      faqs: [
+        {
+          question: 'How is an international arbitration procedure initiated?',
+          answer: 'An international arbitration procedure is typically initiated based on an arbitration clause contained in a commercial contract or investment treaty. The firm assists you through every step: from drafting the notice of arbitration and selecting arbitrators, to submitting written memorials and presenting oral arguments.'
+        },
+        {
+          question: 'What is the difference between commercial and investment arbitration?',
+          answer: 'Commercial arbitration resolves disputes arising from private contractual relationships between commercial entities. Investment arbitration resolves disputes between a foreign investor and a host sovereign State, often based on Bilateral or Multilateral Investment Treaties (BITs).'
+        },
+        {
+          question: 'What does constitutional counsel to States involve in practice?',
+          answer: 'It consists of highly technical doctrinal and strategic support: drafting and revising fundamental constitutional texts, harmonizing national legislation with international treaties, drafting legislative bills, or advising on major electoral and institutional litigation.'
+        },
+        {
+          question: 'How does the firm guarantee the strict confidentiality of state-level files?',
+          answer: 'Absolute confidentiality is a core pillar of our identity. We implement highly secure, diplomatic-grade communication and archiving protocols. All staff and affiliated experts are legally bound by the strictest professional secrecy and non-disclosure obligations.'
         }
       ]
     },
