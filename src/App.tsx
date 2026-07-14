@@ -346,7 +346,7 @@ const HeritagePage = ({ lang }: { lang: Language }) => {
       <PageHeader title={t.title} subtitle={t.subtitle} />
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-32">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-24">
-          <div className="sticky top-32 h-fit">
+          <div className="lg:sticky lg:top-32 h-fit">
             <h3 className="text-3xl font-serif text-forest mb-8">L'Excellence par l'Histoire</h3>
             <p className="text-ink/60 leading-relaxed font-light">{t.content}</p>
           </div>
