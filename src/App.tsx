@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronDown, ArrowRight, Menu, X, Mail, MapPin, Phone, Globe2, FileText, ExternalLink } from 'lucide-react';
-import { translations, Language } from './translations';
+import { translations, Language } from './lang/translations';
 
 // --- Shared Components ---
 
@@ -36,7 +36,8 @@ const Navbar = ({ lang, setLang }: { lang: Language, setLang: (l: Language) => v
   return (
     <header className="bg-white border-b border-forest/10 py-6 px-6 md:px-12 flex justify-between items-center z-50 sticky top-0 shadow-sm">
       <Link to="/" className="font-serif text-2xl font-bold tracking-tight text-forest uppercase">
-        Robert <span className="text-gold">Dossou</span>
+        <span className="hidden sm:inline">Robert <span className="text-gold">Dossou</span></span>
+        <span className="inline sm:hidden">D. <span className="text-gold">Robert</span></span>
       </Link>
 
       <nav className="hidden xl:flex items-center gap-8 text-[11px] uppercase tracking-[2px] font-semibold">
@@ -81,7 +82,10 @@ const Navbar = ({ lang, setLang }: { lang: Language, setLang: (l: Language) => v
             className="fixed inset-0 bg-white z-[60] p-12 flex flex-col gap-8 shadow-2xl"
           >
             <div className="flex justify-between items-center mb-12">
-              <span className="font-serif text-2xl font-bold text-forest uppercase">Robert <span className="text-gold">Dossou</span></span>
+              <span className="font-serif text-2xl font-bold text-forest uppercase">
+                <span className="hidden sm:inline">Robert <span className="text-gold">Dossou</span></span>
+                <span className="inline sm:hidden">D. <span className="text-gold">Robert</span></span>
+              </span>
               <button onClick={() => setIsMenuOpen(false)}><X size={32} /></button>
             </div>
             {navLinks.map((link) => (
@@ -141,13 +145,13 @@ const HomePage = ({ lang }: { lang: Language }) => {
   const t = translations[lang];
   return (
     <div className="flex flex-col">
-      <section className="bg-forest text-white min-h-[85vh] flex flex-col justify-center p-6 md:p-24 relative overflow-hidden">
+      <section className="bg-forest text-white min-h-[85vh] flex flex-col justify-center items-center p-6 md:p-24 relative overflow-hidden">
         <GlobeSVG className="absolute -right-24 top-1/2 -translate-y-1/2 w-[600px] h-[600px] opacity-10" />
-        <div className="max-w-5xl relative z-10">
+        <div className="max-w-3xl mx-auto text-center flex flex-col items-center relative z-10">
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-6xl md:text-8xl lg:text-9xl font-serif leading-[1] mb-8"
+            className="text-4xl md:text-5xl lg:text-6xl font-serif leading-[1.2] mb-8 text-center"
           >
             {t.hero.title.split('. ').map((part, i) => (
               <span key={i} className="block">{part}.</span>
@@ -157,15 +161,15 @@ const HomePage = ({ lang }: { lang: Language }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-xl md:text-2xl text-gold/90 font-light max-w-3xl mb-12 leading-relaxed"
+            className="text-sm md:text-base text-gold/90 font-light max-w-xl mb-12 leading-relaxed text-center"
           >
             {t.hero.subtitle}
           </motion.p>
-          <div className="flex flex-wrap gap-6">
-            <Link to="/contact" className="px-10 py-5 bg-gold text-forest font-bold uppercase text-sm tracking-[3px] hover:bg-white transition-all shadow-lg">
+          <div className="flex flex-wrap justify-center gap-6">
+            <Link to="/contact" className="px-8 py-4 bg-gold text-forest font-bold uppercase text-xs tracking-[3px] hover:bg-white transition-all shadow-lg">
               {t.hero.cta}
             </Link>
-            <Link to="/services" className="px-10 py-5 border border-gold text-gold font-bold uppercase text-sm tracking-[3px] hover:bg-gold hover:text-forest transition-all">
+            <Link to="/services" className="px-8 py-4 border border-gold text-gold font-bold uppercase text-xs tracking-[3px] hover:bg-gold hover:text-forest transition-all">
               {t.nav.services}
             </Link>
           </div>
@@ -289,6 +293,42 @@ const HomePage = ({ lang }: { lang: Language }) => {
                 <h4 className="text-xl font-serif text-forest mb-4">{value.title}</h4>
                 <p className="text-sm text-ink/60 font-light leading-relaxed">{value.desc}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-32 px-6 md:px-12 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-24">
+            <span className="text-gold uppercase tracking-[4px] text-xs font-bold mb-6 block">
+              {t.testimonials.title}
+            </span>
+            <h2 className="text-4xl md:text-6xl font-serif text-forest">
+              {t.testimonials.subtitle}
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            {t.testimonials.items.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-pearl/30 p-10 border border-forest/5 flex flex-col justify-between hover:border-gold/30 transition-colors"
+              >
+                <div>
+                  <span className="text-gold font-serif text-6xl block leading-none mb-4">“</span>
+                  <p className="text-base text-forest italic font-light leading-relaxed mb-8">
+                    {item.quote}
+                  </p>
+                </div>
+                <div className="border-t border-forest/10 pt-6">
+                  <h4 className="font-serif text-lg text-forest font-semibold">{item.author}</h4>
+                  <p className="text-[11px] uppercase tracking-wider text-gold font-medium mt-1">{item.role}</p>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>

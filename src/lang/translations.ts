@@ -117,6 +117,27 @@ export const translations = {
       location: 'Cotonou, Bénin | Paris, France | Genève, Suisse',
       phone: '+229 21 31 XX XX',
       email_addr: 'contact@robertdossou.com'
+    },
+    testimonials: {
+      title: 'Témoignages Institutionnels',
+      subtitle: 'Ce que disent nos partenaires étatiques et corporatifs de notre expertise.',
+      items: [
+        {
+          quote: '« La rigueur doctrinale et la hauteur diplomatique du Cabinet Robert DOSSOU ont été décisives dans la résolution de notre différend frontalier devant les juridictions internationales. »',
+          author: 'S.E. Ambassadeur Marc-Antoine Debras',
+          role: 'Représentant Permanent auprès des Nations Unies'
+        },
+        {
+          quote: '« Un conseil d’un niveau exceptionnel. Leur maîtrise absolue de l’arbitrage international d’investissement nous a permis de sécuriser nos partenariats stratégiques avec les États souverains. »',
+          author: 'Geneviève Moreau',
+          role: 'Directrice Juridique, Global Energy & Infrastructure Group'
+        },
+        {
+          quote: '« Au-delà de l\'expertise constitutionnelle inégalée, Maître Robert DOSSOU apporte une vision d\'homme d\'État indispensable lors des réformes législatives complexes. »',
+          author: 'Prof. Albert K. Mensah',
+          role: 'Ancien Ministre de la Justice & Garde des Sceaux'
+        }
+      ]
     }
   },
   EN: {
@@ -205,7 +226,7 @@ export const translations = {
       items: [
         {
           date: 'March 2024',
-          category: 'Arbitration',
+          category: 'Arbitrage',
           title: 'The evolution of arbitration clauses in bilateral investment treaties.',
           author: 'Robert Dossou'
         },
@@ -235,7 +256,27 @@ export const translations = {
       location: 'Cotonou, Benin | Paris, France | Geneva, Switzerland',
       phone: '+229 21 31 XX XX',
       email_addr: 'contact@robertdossou.com'
+    },
+    testimonials: {
+      title: 'Institutional Testimonials',
+      subtitle: 'What our state and corporate partners say about our expertise.',
+      items: [
+        {
+          quote: '"The doctrinal rigor and diplomatic stature of Cabinet Robert DOSSOU were decisive in resolving our border dispute before international courts."',
+          author: 'H.E. Ambassador Marc-Antoine Debras',
+          role: 'Permanent Representative to the United Nations'
+        },
+        {
+          quote: '"Counsel of an exceptional standard. Their absolute mastery of international investment arbitration allowed us to secure our strategic partnerships with sovereign states."',
+          author: 'Geneviève Moreau',
+          role: 'General Counsel, Global Energy & Infrastructure Group'
+        },
+        {
+          quote: '"Beyond peerless constitutional expertise, Maître Robert DOSSOU brings an indispensable statesperson-like vision to complex legislative reforms."',
+          author: 'Prof. Albert K. Mensah',
+          role: 'Former Minister of Justice & Attorney General'
+        }
+      ]
     }
   }
 };
-
