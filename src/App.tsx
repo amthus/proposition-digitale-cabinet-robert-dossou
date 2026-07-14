@@ -240,11 +240,11 @@ const HomePage = ({ lang }: { lang: Language }) => {
             <p className="text-xl text-ink/80 leading-relaxed mb-12 font-light italic border-l-4 border-gold pl-8">
               {t.about.founder_text}
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="grid grid-cols-3 gap-2 sm:gap-6 md:gap-12">
               {t.about.founder_stats.map((stat, i) => (
-                <div key={i}>
-                  <span className="text-4xl font-serif text-gold block mb-2">{stat.value}</span>
-                  <p className="text-[10px] uppercase tracking-widest text-ink/40 font-bold leading-tight">{stat.label}</p>
+                <div key={i} className="min-w-0">
+                  <span className="text-2xl min-[380px]:text-3xl sm:text-4xl font-serif text-gold block mb-1 sm:mb-2">{stat.value}</span>
+                  <p className="text-[8px] min-[380px]:text-[9px] sm:text-[10px] uppercase tracking-wider sm:tracking-widest text-ink/40 font-bold leading-tight break-words">{stat.label}</p>
                 </div>
               ))}
             </div>
@@ -265,11 +265,13 @@ const HomePage = ({ lang }: { lang: Language }) => {
               <ArrowRight className="group-hover:translate-x-2 transition-transform" />
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-2 gap-4 sm:gap-8">
             {t.heritage.events.slice(0, 4).map((event, i) => (
-              <div key={i} className="p-8 border border-forest/5 bg-pearl/30">
-                <span className="text-3xl font-serif text-gold block mb-4">{event.year}</span>
-                <h4 className="font-bold text-sm uppercase mb-2">{event.title}</h4>
+              <div key={i} className="p-4 sm:p-6 lg:p-8 border border-forest/5 bg-pearl/30 flex flex-col justify-center min-h-[140px] sm:min-h-0">
+                <span className="text-2xl sm:text-3xl font-serif text-gold block mb-2 sm:mb-4">{event.year}</span>
+                <h4 className="font-bold text-[10px] sm:text-xs md:text-sm uppercase tracking-wider mb-2 leading-tight break-words">
+                  {event.title}
+                </h4>
               </div>
             ))}
           </div>
@@ -614,23 +616,33 @@ const Footer = ({ lang }: { lang: Language }) => {
             </AnimatePresence>
           </div>
         </div>
-        <div>
-          <h4 className="text-gold uppercase tracking-widest text-xs font-bold mb-8">Navigation</h4>
-          <ul className="space-y-4 text-sm font-light text-white/70">
-            <li><Link to="/heritage" className="hover:text-gold transition-colors">{t.heritage}</Link></li>
-            <li><Link to="/services" className="hover:text-gold transition-colors">{t.services}</Link></li>
-            <li><Link to="/expertise" className="hover:text-gold transition-colors">{t.expertise}</Link></li>
-            <li><Link to="/publications" className="hover:text-gold transition-colors">{t.publications}</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-gold uppercase tracking-widest text-xs font-bold mb-8">Contact</h4>
-          <ul className="space-y-4 text-sm font-light text-white/70">
-            <li>Cotonou, Bénin</li>
-            <li>Paris, France</li>
-            <li>Genève, Suisse</li>
-            <li className="text-gold font-bold">contact@robertdossou.com</li>
-          </ul>
+        <div className="col-span-1 md:col-span-2 grid grid-cols-2 gap-8 min-w-0">
+          <div>
+            <h4 className="text-gold uppercase tracking-widest text-xs font-bold mb-8">Navigation</h4>
+            <ul className="space-y-4 text-sm font-light text-white/70">
+              <li><Link to="/heritage" className="hover:text-gold transition-colors">{t.heritage}</Link></li>
+              <li><Link to="/services" className="hover:text-gold transition-colors">{t.services}</Link></li>
+              <li><Link to="/expertise" className="hover:text-gold transition-colors">{t.expertise}</Link></li>
+              <li><Link to="/publications" className="hover:text-gold transition-colors">{t.publications}</Link></li>
+            </ul>
+          </div>
+          <div className="min-w-0">
+            <h4 className="text-gold uppercase tracking-widest text-xs font-bold mb-8">Contact</h4>
+            <ul className="space-y-4 text-sm font-light text-white/70">
+              <li>Cotonou, Bénin</li>
+              <li>Paris, France</li>
+              <li>Genève, Suisse</li>
+              <li className="min-w-0">
+                <Link 
+                  to="/contact" 
+                  className="text-gold font-bold hover:text-white transition-colors block truncate max-w-full"
+                  title="contact@robertdossou.com"
+                >
+                  contact@robertdossou.com
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <div className="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between text-[10px] uppercase tracking-widest text-white/30 gap-4">
